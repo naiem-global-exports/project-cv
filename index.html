@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naiem Global Exports</title>
+<style>
+body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; color: white; }
+.hero-modern { height: 100vh; background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; position: relative; }
+.hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); }
+.hero-content { position: relative; z-index:2; max-width:900px; padding:0 20px; }
+.hero-content h1 { font-size:4rem; font-weight:900; background: linear-gradient(90deg, #1E90FF, #00FFDD, #FF69B4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(30,144,255,0.5); margin-bottom:20px; }
+.hero-content p.subtitle { color:#E0F0FF; font-size:1.4rem; line-height:1.8; text-shadow:0 0 8px rgba(255,255,255,0.2); margin-bottom:30px;}
+.hero-buttons button { padding: 14px 30px; font-size:1.1rem; border-radius:50px; border:none; cursor:pointer; margin:0 10px; }
+
+/* Slide animation for order form */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#orderForm {
+  display: none;
+  animation: slideDown 0.5s ease forwards;
+  transition: all 0.3s ease;
+}
+
+
+.btn-primary { background:#1E90FF; color:white;}
+.btn-primary:hover { background:#0066CC; transform:scale(1.05);}
+.btn-secondary { background: rgba(255,255,255,0.1); color:#1E90FF; border:1px solid #1E90FF;}
+.btn-secondary:hover { background: rgba(255,255,255,0.2); }
+.na-naiem { background: rgba(255, 255,255, 0.1); color: #1E90FF; border: 1px solid #1E90FF;}
+.na-naiem:hover { background: rgba(255,255,255,0.2); }
+#productsModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95); overflow-y:auto; z-index:1000; padding:40px 20px;}
+.closeBtn { position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer; color:white;}
+.product-category { margin-bottom:50px; }
+.product-category h3 { text-align:center; margin-bottom:20px; }
+.product-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
+.product-item { width:220px; background:#1e1e1e; border-radius:12px; padding:15px; text-align:center; color:white; transition:0.3s; }
+.product-item:hover { transform:scale(1.05); box-shadow:0 0 15px rgba(30,144,255,0.3);}
+.product-item img { width:100%; height:200px; object-fit:cover; border-radius:8px;}
+.product-item h4 { margin-top:10px; font-size:1.1rem; color:#00FFDD;}
+.product-item p { font-size:0.95rem; color:#ddd;}
+.product-item .price { color:#FFD700; font-weight:bold; margin-top:5px;}
+.product-item button { padding:8px 15px; border:none; border-radius:50px; background:#1E90FF; color:white; margin-top:10px; cursor:pointer;}
+#productModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1001;}
+#productModal .modal-content { background:#1e1e1e; border-radius:12px; max-width:600px; width:90%; max-height:90vh; padding:20px; position:relative; text-align:center; overflow-y:auto; }
+#productModal img { width:100%; max-height:400px; object-fit:contain; margin-bottom:15px; }
+#productModal h3, #productModal p { word-wrap:break-word; text-align:left; line-height:1.5; }
+#productModal button { padding:12px 25px; border:none; border-radius:50px; background:#1E90FF; color:white; font-weight:bold; cursor:pointer; margin:8px; }
+.back-btn { display:block; margin:20px auto; padding:12px 25px; background:#FFD700; color:black; font-weight:bold; border:none; border-radius:50px; cursor:pointer;}
+.back-btn:hover { background:#FFC300;}
+
+/*  Line ~130 (তোমার style শেষের দিকে) */
+@keyframes slideFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero-modern" style="background-image: url('p1.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Naiem Global Exports</h1>
+    <p class="subtitle">Exporting excellence from Bangladesh to the world — quality, trust & innovation you can rely on.</p>
+    <div class="hero-buttons">
+      <button onclick="showProductsModal()" class="btn-primary">🛒 Shop Now</button>
+      <button class="btn-secondary">📞 Contact Us</button>
+      <button class="na-naiem">🤵 About CEO </button>
+      <header style=" background:#111; padding:15px 30px; display:flex; justify-content:center; align-items:center; gap:40px; position:fixed; top:0; left:0; width:100%; z-index:2000; box-shadow:0 0 10px rgba(30,144,255,0.3); ">
+        <h2 style="margin:0; color:#1E90FF;">🌀 Naiem Global Exports</h2>
+        <nav style="display:flex; align-items:center; gap:25px;">
+          <a href="#" style="color:white; text-decoration:none; font-weight:500;">🏠 Home</a>
+          <a href="cart.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">🛒 View Cart</a>
+        </nav>
+      </header>
+    </div>
+  </div>
+  
+</section>
+
+<!-- Products Modal -->
+<div id="productsModal">
+  <span onclick="closeProductsModal()" class="closeBtn">&times;</span>
+  <h2 style="text-align:center;">Our Products</h2>
+
+  <!-- Clothing -->
+  <div class="product-category">
+    <h3 style="color:#1E90FF;">Fashionable Clothing</h3>
+    <div id="clothing" class="product-grid"></div>
+  </div>
+
+  <!-- Food -->
+  <div class="product-category">
+    <h3 style="color:#FF69B4;">Nutritious Food</h3>
+    <div id="food" class="product-grid"></div>
+  </div>
+
+  <!-- Bag Collection -->
+  <div class="product-category">
+    <h3 style="color:#FFD700;">Bag Collection</h3>
+    <div id="bags" class="product-grid"></div>
+  </div>
+</div>
+
+<!-- Product Detail Modal (Updated with Order Form) -->
+<div id="productModal">
+  <div class="modal-content">
+    <span onclick="closeModal()" class="closeBtn">&times;</span>
+    <img id="modalImage" src="">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDescription"></p>
+    <p id="modalPrice" style="color:#FFD700; font-weight:bold;"></p>
+
+    <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
+      <button id="modalAddToCart">Add to Cart</button>
+      <button id="orderNowBtn" style="background:#FFD700; color:black; font-weight:bold;">Order Now</button>
+    </div>
+
+    <!-- Hidden Order Form -->
+    <div id="orderForm" style="display:none; text-align:left; background:#222; padding:20px; border-radius:10px; margin-top:10px;">
+      <h3 style="text-align:center; color:#00FFDD;">🛍 Place Your Order</h3>
+      <label>Full Name:</label>
+      <input type="text" id="custName" placeholder="Enter your full name" required style="width:100%; padding:8px; border:none; border-radius:5px; margin-bottom:10px;">
+      
+      <label>Mobile Number:</label>
+      <input type="text" id="custMobile" placeholder="e.g. 019XXXXXXXX" required style="width:100%; padding:8px; border:none; border-radius:5px; margin-bottom:10px;">
+      
+      <label>Email Address:</label>
+      <input type="email" id="custEmail" placeholder="Enter your Gmail" required style="width:100%; padding:8px; border:none; border-radius:5px; margin-bottom:10px;">
+      
+      <label>Delivery Address:</label>
+      <textarea id="custAddress" placeholder="Your full address" required style="width:100%; padding:8px; border:none; border-radius:5px; margin-bottom:10px;"></textarea>
+      
+      <button id="confirmOrderBtn" style="background:#1E90FF; color:white; font-weight:bold; width:100%; padding:10px; border:none; border-radius:8px;">Confirm Order</button>
+    </div>
+
+    <!-- Order Confirmation Message -->
+    <div id="orderSuccessMsg" style="display:none; text-align:center; color:#00FF88; font-size:1.2rem; margin-top:15px; font-weight:bold;">
+      ✅ Your order is confirmed!<br>
+      Thank you for shopping with <span style="color:#FFD700;">Naiem Global Exports</span> 💙
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Show/Hide Modals
+function showProductsModal(){ document.getElementById('productsModal').style.display='block'; }
+function closeProductsModal(){ document.getElementById('productsModal').style.display='none'; }
+
+// Product Detail Modal
+function openModal(image, title, description, price){
+  document.getElementById('modalImage').src=image;
+  document.getElementById('modalTitle').innerText=title;
+  document.getElementById('modalDescription').innerText=description;
+  document.getElementById('modalPrice').innerText="Price: "+price;
+  document.getElementById('productModal').style.display='flex';
+}
+function closeModal(){ document.getElementById('productModal').style.display='none'; }
+
+// Generate Products
+function generateClothing(){
+  let c=document.getElementById("clothing");
+  let clothingDesc=[ "Premium cotton shirt — soft & breathable for all day wear.", "Stylish denim jeans — perfect for casual and office look.", "Elegant women's top — ideal for parties & outings.", "Classic polo t-shirt — trendy, comfortable & durable.", "Formal shirt made from export-quality cotton.", "Cozy casual hoodie — perfect for winter & layering.", "Fashionable trousers — modern cut with perfect fit.", "Traditional outfit — rich colors & fine embroidery.", "Comfortable pajama set — soft fabric for all seasons.", "Smart blazer — professional look for business events.", "Men's jacket — warm, stylish and rugged.", "Printed scarf — lightweight & versatile accessory.", "Trendy men's casual wear — ideal for weekend.", "Kids wear — soft, skin-friendly & colorful.", "Women's long dress — elegant & graceful for events.", "Casual half-pant — perfect for daily home wear.", "Men’s kurta — traditional yet modern design.", "Ladies embroidered top — chic & stylish for outings.", "Men’s sweater — cozy, warm & durable.", "Denim jacket — rugged look, perfect for casual wear." ];
+  for(let i=1;i<=20;i++){
+    let img=`z${i}.jpg`; let desc=clothingDesc[i-1]; let price=1200+i*30;
+    c.innerHTML+=`<div class="product-item"><img src="${img}"><h4>Clothing ${i}</h4><p>${desc}</p><p class="price">৳${price}</p><button onclick="openModal('${img}','Clothing ${i}','${desc}','৳${price}')">More Info</button></div>`;
+  }
+}
+
+function generateFood(){
+  let f=document.getElementById("food");
+  let foodDesc=[ "Premium rice — fresh, aromatic & top quality.", "Mustard oil — pure, natural & healthy for cooking.", "Fresh Rajshahi mangoes — juicy & sweet.", "Natural honey — pure & rich in flavor.", "Organic lentils — high protein & nutritious.", "Tea leaves — premium quality from Sylhet.", "Coffee beans — strong aroma, rich taste.", "Dried fish — clean, tasty & ready to cook.", "Ghee — pure cow milk, traditional flavor.", "Fresh vegetables — farm to table, organic.", "Banana chips — crispy, healthy & tasty.", "Coconut oil — natural & multipurpose.", "Organic spices — hand-picked & aromatic.", "Premium peanuts — crunchy & fresh.", "Packaged sweets — traditional & delicious.", "Mango pickle — spicy, tangy & authentic.", "Tomato sauce — rich flavor, perfect for cooking.", "Organic sugar — pure & natural taste.", "Milk powder — creamy, high quality.", "Fried snacks — crunchy & delightful." ];
+  for(let i=1;i<=20;i++){
+    let img=`x${i}.jpg`; let desc=foodDesc[i-1]; let price=250+i*10;
+    f.innerHTML+=`<div class="product-item"><img src="${img}"><h4>Food ${i}</h4><p>${desc}</p><p class="price">৳${price}</p><button onclick="openModal('${img}','Food ${i}','${desc}','৳${price}')">More Info</button></div>`;
+  }
+}
+
+function generateBags(){
+  let b=document.getElementById("bags");
+  let bagDesc=[ "Leather office bag — durable, stylish & elegant.", "Travel backpack — waterproof, spacious & reliable.", "Ladies handbag — classy design for daily use.", "Laptop bag — stylish & protective for gadgets.", "School bag — lightweight, strong & comfortable.", "Trolley luggage — premium build & smooth wheels.", "Sling bag — modern design, small & cute.", "Gym bag — compact, trendy & multipurpose.", "Canvas tote bag — eco-friendly & spacious.", "Wallet — soft leather, elegant & functional.", "Clutch purse — ideal for parties & events.", "Messenger bag — unisex, practical & stylish.", "Shopping bag — foldable, sturdy & durable.", "Camera bag — padded, secure & versatile.", "Handmade jute bag — eco-friendly & unique.", "Mini shoulder bag — trendy & fashionable.", "Laptop sleeve — slim, modern & protective.", "Office file bag — professional look & sturdy.", "Sports duffel bag — large capacity & durable.", "Kids school bag — colorful, light & fun." ];
+  for(let i=1;i<=20;i++){
+    let img=`c${i}.jpg`; let desc=bagDesc[i-1]; let price=900+i*40;
+    b.innerHTML+=`<div class="product-item"><img src="${img}"><h4>Bag Collection ${i}</h4><p>${desc}</p><p class="price">৳${price}</p><button onclick="openModal('${img}','Bag ${i}','${desc}','৳${price}')">More Info</button></div>`;
+  }
+}
+
+// Cart Array
+// page load হলে আগের cart load করো
+let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+
+
+// Add to Cart Function
+function addToCart(name, price){
+  let image = document.getElementById('modalImage').src;
+  let description = document.getElementById('modalDescription').innerText;
+  cart.push({name: name, price: price, image: image, description: description});
+  localStorage.setItem("cartData", JSON.stringify(cart));
+  updateCartDisplay();
+  alert(`${name} added to your cart 🛒`);
+}
+
+// Create Cart Display
+let cartDiv = document.createElement('div');
+cartDiv.id = "cartDiv";
+cartDiv.style.position = "fixed";
+cartDiv.style.top = "20px";
+cartDiv.style.right = "20px";
+cartDiv.style.background = "#1E90FF";
+cartDiv.style.color = "white";
+cartDiv.style.padding = "15px";
+cartDiv.style.borderRadius = "12px";
+cartDiv.style.width = "250px";
+cartDiv.style.maxHeight = "400px";
+cartDiv.style.overflowY = "auto";
+cartDiv.style.zIndex = "2000";
+cartDiv.style.display = "none";
+document.body.appendChild(cartDiv);
+
+// Update Cart Display
+function updateCartDisplay(){
+  cartDiv.style.display = "block";
+  cartDiv.innerHTML = "<h3>🛒 Cart</h3>";
+  cart.forEach((item, index) => {
+    cartDiv.innerHTML += `<p>${index+1}. ${item.name} - ${item.price}</p>`;
+  });
+  cartDiv.innerHTML += `<hr><button onclick="clearCart()" style="padding:8px 12px; border:none; border-radius:8px; background:#FFD700; color:black; cursor:pointer;">Clear Cart</button>`;
+}
+
+// Clear Cart
+function clearCart(){
+  cart = [];
+  cartDiv.innerHTML = "<h3>🛒 Cart</h3><p>No items in cart.</p>";
+  cartDiv.style.display = "none";
+}
+
+
+
+// Initialize
+generateClothing(); generateFood(); generateBags();
+document.getElementById("modalAddToCart").addEventListener("click", function(){
+    let name = document.getElementById("modalTitle").innerText;
+    let price = document.getElementById("modalPrice").innerText.replace("Price: ","");
+    addToCart(name, price); // ✅ এখন আসল ফাংশন কল হচ্ছে
+    alert(name + " কার্টে যোগ হয়েছে 🛒 এখন Home Page থেকে View Cart থেকে দেখতে পারবে।");
+    closeModal();
+});
+// Line ~350 (Modal JS শেষে, generateProducts এর পরে)
+// 🛍 Order Now Button Click (Form Slide From Top)
+const orderBtn = document.getElementById("orderNowBtn");
+const orderForm = document.getElementById("orderForm");
+const successMsg = document.getElementById("orderSuccessMsg");
+
+orderBtn.addEventListener("click", function () {
+  if(orderForm.style.display === "none" || orderForm.style.display === "") {
+    orderForm.style.display = "block";
+    orderForm.style.animation = "slideFromTop 0.6s ease";
+    successMsg.style.display = "none";
+  } else {
+    orderForm.style.display = "none";
+  }
+});
+
+// ✅ Confirm Order Button
+document.getElementById("confirmOrderBtn").addEventListener("click", function () {
+  let name = document.getElementById("custName").value.trim();
+  let mobile = document.getElementById("custMobile").value.trim();
+  let email = document.getElementById("custEmail").value.trim();
+  let address = document.getElementById("custAddress").value.trim();
+
+  if(!name || !mobile || !email || !address) {
+    alert("⚠️ Please fill in all fields before confirming your order!");
+    return;
+  }
+
+  let product = document.getElementById("modalTitle").innerText;
+  let price = document.getElementById("modalPrice").innerText;
+  let orderData = { name, mobile, email, address, product, price, time: new Date().toLocaleString() };
+
+  // Hide form
+  orderForm.style.display = "none";
+
+  // Show Confirmation Popup (Print Style)
+  let popup = window.open("", "", "width=400,height=600");
+  popup.document.write(`
+    <html>
+      <head>
+        <title>Order Confirmation</title>
+        <style>
+          body { font-family: 'Segoe UI', sans-serif; background: #f0f0f0; padding: 20px; }
+          .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2); text-align:center; }
+          h2 { color: green; }
+          .details { text-align:left; margin-top:10px; line-height:1.6; }
+          .btn-print { margin-top:20px; padding:10px 15px; border:none; background:#1E90FF; color:white; border-radius:8px; cursor:pointer; }
+          .footer { font-size:13px; color:#666; margin-top:15px; }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h2>✅ Your Order is Confirmed!</h2>
+          <p>Thank you for shopping with <b>Naiem Global Exports</b> 💙</p>
+          <hr>
+          <div class="details">
+            <p><b>Name:</b> ${orderData.name}</p>
+            <p><b>Mobile:</b> ${orderData.mobile}</p>
+            <p><b>Email:</b> ${orderData.email}</p>
+            <p><b>Address:</b> ${orderData.address}</p>
+            <p><b>Product:</b> ${orderData.product}</p>
+            <p><b>${orderData.price}</b></p>
+            <p><b>Order Time:</b> ${orderData.time}</p>
+          </div>
+          <button class="btn-print" onclick="window.print()">🖨️ Print Receipt</button>
+          <div class="footer">© Naiem Global Exports | Auto Generated Confirmation</div>
+        </div>
+      </body>
+    </html>
+  `);
+  popup.document.close();
+});
+
+
+
+</script>
+</body>
+</html>
